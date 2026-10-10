@@ -9,7 +9,7 @@ use std::{
 
 use async_channel::{Receiver, Sender};
 use glib::clone;
-use gtk::glib;
+use gtk::{gio::prelude::SettingsExt, glib};
 use log::{debug, error};
 
 use crate::{
@@ -18,6 +18,7 @@ use crate::{
         Controller, CoverCache, GstBackend, InhibitController, MprisController, PlayerState, Queue,
         Song, WaveformGenerator,
     },
+    utils,
 };
 
 #[derive(Clone, Debug)]
@@ -154,6 +155,10 @@ impl AudioPlayer {
             state,
             waveform_generator,
         });
+
+        let settings = utils::settings_manager();
+        let volume = settings.double("last-volume");
+        res.set_volume(volume);
 
         res.clone().setup_channel();
 
@@ -480,6 +485,10 @@ impl AudioPlayer {
     fn update_volume(&self, volume: f64) {
         debug!("Updating volume to: {}", &volume);
         self.state.set_volume(volume);
+        let settings = utils::settings_manager();
+        settings
+            .set_double("last-volume", volume)
+            .expect("Unable to set volume");
     }
 
     pub fn set_volume(&self, volume: f64) {

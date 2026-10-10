@@ -5,3 +5,6 @@ src/config.rs
 target
 
 subprojects/blueprint-compiler
+subprojects/.wraplock
+
+build_dir/

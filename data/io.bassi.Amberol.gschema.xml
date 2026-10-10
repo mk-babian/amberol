@@ -21,5 +21,8 @@
 	  <key name="background-play" type="b">
 	    <default>true</default>
 	  </key>
+	  <key name="last-volume" type="d">
+	  	<default>0.5</default>
+	  </key>
 	</schema>
 </schemalist>

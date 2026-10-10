@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2022  Emmanuele Bassi
+// SPDX-FileCopyrightText: 2026  Emir Saba Arslan
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use std::{
